@@ -1,0 +1,58 @@
+---
+interface Props {
+  name: string;
+  nameEn: string;
+}
+
+const { name, nameEn } = Astro.props;
+
+const links = [
+  {
+    label: `PubMed 检索「${nameEn} acupuncture」`,
+    url: `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(nameEn + " acupuncture")}`,
+    desc: "英文临床研究",
+  },
+  {
+    label: `百度学术检索「${name} 针灸 治疗」`,
+    url: `https://xueshu.baidu.com/s?wd=${encodeURIComponent(`${name} 针灸 治疗`)}`,
+    desc: "中文文献",
+  },
+  {
+    label: `Cochrane 证据检索`,
+    url: `https://www.cochranelibrary.com/search?q=${encodeURIComponent(nameEn + " acupuncture")}`,
+    desc: "系统评价",
+  },
+  {
+    label: `ctext 检索古籍原文`,
+    url: `https://ctext.org/searchbooks.pl?if=gb&searchu=${encodeURIComponent(name)}`,
+    desc: "古籍溯源",
+  },
+];
+---
+
+<section class="paper-card p-5">
+  <div class="flex flex-wrap items-center justify-between gap-2">
+    <h2 class="section-title text-lg">文献与延伸阅读</h2>
+    <a href="/references/" class="text-sm text-qing hover:underline">文献知识库 →</a>
+  </div>
+  <p class="mt-3 text-sm leading-7 text-ink-soft">
+    以下按「{name}（{nameEn}）」自动生成权威数据库检索链接，可查临床试验、系统评价与古籍原文。
+  </p>
+  <ul class="mt-3 grid gap-2 sm:grid-cols-2">
+    {
+      links.map((l) => (
+        <li>
+          <a
+            href={l.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="paper-card block px-3 py-2.5 hover:border-qing-soft"
+          >
+            <span class="text-sm font-bold">{l.label}</span>
+            <span class="ml-1.5 rounded bg-paper-deep px-1.5 py-0.5 text-xs text-ink-soft">{l.desc}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

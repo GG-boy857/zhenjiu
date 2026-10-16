@@ -1,0 +1,101 @@
+---
+import videosJson from "../data/videos.json";
+
+interface Props {
+  code: string;
+  name: string;
+  nameEn: string;
+}
+
+const { code, name, nameEn } = Astro.props;
+
+type VideoEntry = {
+  platform: string;
+  id: string;
+  title: string;
+  uploader?: string;
+  note?: string;
+};
+const videos = videosJson as unknown as Record<string, VideoEntry[]>;
+const curated = videos[code] ?? [];
+
+const q = encodeURIComponent(`${name} 针灸 治疗`);
+const qEn = encodeURIComponent(`${nameEn} acupuncture treatment`);
+const searches = [
+  { label: "B 站搜「治疗/取穴」视频", url: `https://search.bilibili.com/all?keyword=${q}` },
+  { label: "YouTube 搜教学", url: `https://www.youtube.com/results?search_query=${qEn}` },
+];
+---
+
+<section class="paper-card p-5">
+  <div class="flex flex-wrap items-center justify-between gap-2">
+    <h2 class="section-title text-lg">治疗视频</h2>
+    <span class="text-xs text-ink-faint">视频来自第三方平台，仅供学习参考；操作请勿自行模仿</span>
+  </div>
+
+  {
+    curated.length > 0 ? (
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        {curated.map((v) => (
+          <figure class="overflow-hidden rounded-lg border border-line bg-paper">
+            <div class="aspect-video w-full">
+              {v.platform === "bilibili" && (
+                <iframe
+                  src={`https://player.bilibili.com/player.html?bvid=${v.id}&autoplay=0&danmaku=0&high_quality=1`}
+                  title={v.title}
+                  loading="lazy"
+                  allowfullscreen
+                  class="h-full w-full border-0"
+                />
+              )}
+              {v.platform === "youtube" && (
+                <iframe
+                  src={`https://www.youtube.com/embed/${v.id}`}
+                  title={v.title}
+                  loading="lazy"
+                  allowfullscreen
+                  class="h-full w-full border-0"
+                />
+              )}
+            </div>
+            <figcaption class="px-3 py-2">
+              <a
+                href={v.platform === "bilibili" ? `https://www.bilibili.com/video/${v.id}` : `https://www.youtube.com/watch?v=${v.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm font-bold hover:text-vermilion"
+              >
+                {v.title} ↗
+              </a>
+              <p class="mt-0.5 text-xs text-ink-faint">
+                {v.uploader ? `${v.uploader} · ` : ""}
+                {v.note ?? ""}
+              </p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    ) : (
+      <p class="mt-3 text-sm leading-7 text-ink-soft">
+        本穴暂无精选视频，可从下面的入口搜索「{name}」的取穴定位与治疗演示；想在站内内嵌视频，往
+        <code class="rounded bg-paper-deep px-1">src/data/videos.json</code>
+        里加一条即可（见 README）。
+      </p>
+    )
+  }
+
+  <div class="mt-4 flex flex-wrap gap-2">
+    {
+      searches.map((s) => (
+        <a
+          href={s.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="rounded-md border border-line bg-paper px-3 py-1.5 text-sm text-ink-soft transition-colors hover:border-qing-soft hover:text-qing"
+        >
+          ▶ {s.label}
+        </a>
+      ))
+    }
+  </div>
+</section>

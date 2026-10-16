@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SearchClient from "../components/SearchClient.tsx";
+import { buildSearchIndex } from "../lib/search";
+import { acupoints, meridians } from "../lib/data";
+
+const index = buildSearchIndex(acupoints, meridians);
+---
+
+<BaseLayout title="搜索" description="按穴位名、拼音、国际代码或主治病症检索穴位">
+  <h1 class="section-title">全局搜索</h1>
+  <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">
+    支持中文穴名（如“合谷”）、拼音（如“Hegu”）、国际代码（如“LI4”）以及主治病症关键词（如“头痛”），
+    结果按相关度排序并高亮命中内容。
+  </p>
+
+  <div class="mt-6">
+    <SearchClient client:load index={index} />
+  </div>
+</BaseLayout>

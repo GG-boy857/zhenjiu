@@ -1,0 +1,152 @@
+[
+  {
+    "id": "who-sapl",
+    "category": "国际与国家标准",
+    "title": "WHO Standard Acupuncture Point Locations in the Western Pacific Region",
+    "org": "世界卫生组织西太平洋区域办事处",
+    "year": "2008",
+    "url": "https://iris.who.int/handle/10665/42417",
+    "desc": "世卫组织西太区发布的经穴定位国际标准（ISBN 978 92 9061 248 7），与国标 GB/T 12346 同源，是穴位定位表述的权威依据之一。",
+    "tags": ["定位"]
+  },
+  {
+    "id": "gbt-12346",
+    "category": "国际与国家标准",
+    "title": "GB/T 12346-2021《腧穴名称与定位》",
+    "org": "国家市场监督管理总局 / 国家标准化管理委员会",
+    "year": "2021",
+    "url": "https://openstd.samr.gov.cn/bzgk/gb/std_list?p.p2=12346",
+    "desc": "现行国家标准，规定 361 个经穴与 48 个经外奇穴的名称与定位（替代 2006 版）。可在国家标准全文公开系统按标准号查阅。",
+    "tags": ["定位"]
+  },
+  {
+    "id": "ctext-suwen",
+    "category": "经典古籍（在线全文）",
+    "title": "《黄帝内经·素问》",
+    "org": "中国哲学书电子化计划（ctext）",
+    "year": "",
+    "url": "https://ctext.org/huangdi-neijing/suwen/zhs",
+    "desc": "中医理论奠基之作的免费全文电子版，支持简繁与英文检索；经络、病机条文的主要出处。",
+    "tags": ["经典"]
+  },
+  {
+    "id": "ctext-lingshu",
+    "category": "经典古籍（在线全文）",
+    "title": "《黄帝内经·灵枢》",
+    "org": "中国哲学书电子化计划（ctext）",
+    "year": "",
+    "url": "https://ctext.org/huangdi-neijing/ling-shu/zhs",
+    "desc": "又称《针经》，系统记载九针、刺法与经络循行，是针灸理论的源头文献；本站多数五输穴“首载于《灵枢·本输》”即出于此。",
+    "tags": ["经典"]
+  },
+  {
+    "id": "ctext-dacheng",
+    "category": "经典古籍（在线全文）",
+    "title": "《针灸大成》（明·杨继洲）",
+    "org": "中国哲学书电子化计划（ctext，按作者检索）",
+    "year": "1601",
+    "url": "https://ctext.org/searchbooks.pl?if=gb&author=%E6%A5%8A%E7%B9%BC%E6%B4%B2&remap=gb",
+    "desc": "集明以前针灸学之大成的综合著作；本站多处古籍引文（如《玉龙歌》迎香条）即出自此书。",
+    "tags": ["经典"]
+  },
+  {
+    "id": "ctext-jiayijing",
+    "category": "经典古籍（在线全文）",
+    "title": "《针灸甲乙经》（晋·皇甫谧）",
+    "org": "中国哲学书电子化计划（ctext 站内检索）",
+    "year": "约 259",
+    "url": "https://ctext.org/searchbooks.pl?if=gb&searchu=%E9%92%88%E7%81%B8%E7%94%B2%E4%B9%99%E7%BB%8F",
+    "desc": "现存最早的针灸学专书，系统整理 349 穴的定位与主治；本站大量穴位的“首载文献”即指此书。",
+    "tags": ["经典"]
+  },
+  {
+    "id": "vickers-2018",
+    "category": "循证研究与综述",
+    "title": "Acupuncture for Chronic Pain: Update of an Individual Patient Data Meta-Analysis",
+    "org": "Vickers AJ, et al. The Journal of Pain 19(5)",
+    "year": "2018",
+    "url": "https://doi.org/10.1016/j.jpain.2017.11.005",
+    "desc": "汇总约 39 项 RCT、2 万余名患者的个体数据荟萃分析：针刺治疗慢性肌肉骨骼痛、头痛与骨关节炎的效应显著优于假针刺，效应可持续至 12 个月。",
+    "tags": ["循证"]
+  },
+  {
+    "id": "vickers-2012",
+    "category": "循证研究与综述",
+    "title": "Acupuncture for Chronic Pain: Individual Patient Data Meta-Analysis",
+    "org": "Vickers AJ, et al. Archives of Internal Medicine 172(19)",
+    "year": "2012",
+    "url": "https://doi.org/10.1001/archinternmed.2012.3654",
+    "desc": "2018 更新版的原始分析（29 项 RCT、17,922 例）：针刺效应优于假针刺与不针刺对照。",
+    "tags": ["循证"]
+  },
+  {
+    "id": "cochrane",
+    "category": "循证研究与综述",
+    "title": "Cochrane Library 针灸相关系统评价",
+    "org": "Cochrane Library",
+    "year": "",
+    "url": "https://www.cochranelibrary.com/search?q=acupuncture",
+    "desc": "在 Cochrane 图书馆检索 acupuncture，可按病种获取针刺疗效系统评价的最新证据。",
+    "tags": ["循证"]
+  },
+  {
+    "id": "nccih",
+    "category": "循证研究与综述",
+    "title": "Acupuncture: In Depth",
+    "org": "美国国家补充与综合健康中心（NCCIH）",
+    "year": "",
+    "url": "https://www.nccih.nih.gov/health/acupuncture-in-depth",
+    "desc": "面向公众的针灸循证概述：适应症研究现状、安全性与就诊要点，适合建立对疗效证据的平衡认识。",
+    "tags": ["循证"]
+  },
+  {
+    "id": "bili-gengenguang",
+    "category": "视频课程",
+    "title": "针灸取穴定位真人演示（耿恩广教授等）",
+    "org": "Bilibili 检索入口",
+    "year": "",
+    "url": "https://search.bilibili.com/all?keyword=%E8%80%BF%E6%81%A9%E5%B9%BF%20%E9%92%88%E7%81%B8%E5%8F%96%E7%A9%B4",
+    "desc": "北京中医药大学耿恩广教授取穴定位真人演示等系列教学视频的 B 站检索入口。",
+    "tags": ["视频"]
+  },
+  {
+    "id": "bili-zhenjiuxue",
+    "category": "视频课程",
+    "title": "B 站「针灸学 / 穴位」公开课与讲解合集",
+    "org": "Bilibili 检索入口",
+    "year": "",
+    "url": "https://search.bilibili.com/all?keyword=%E9%92%88%E7%81%B8%E5%AD%A6%20%E7%A9%B4%E4%BD%8D",
+    "desc": "中医药院校课件、每日一穴、经络循行动画等大量免费视频的检索入口。",
+    "tags": ["视频"]
+  },
+  {
+    "id": "pubmed",
+    "category": "数据库与检索工具",
+    "title": "PubMed",
+    "org": "美国国家医学图书馆（NLM）",
+    "year": "",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/",
+    "desc": "生物医学文献检索库；穴位详情页的“文献检索直达”会按穴位名自动生成 PubMed 检索链接。",
+    "tags": ["工具"]
+  },
+  {
+    "id": "xueshu",
+    "category": "数据库与检索工具",
+    "title": "百度学术",
+    "org": "百度",
+    "year": "",
+    "url": "https://xueshu.baidu.com/",
+    "desc": "中文文献检索，适合查穴位临床研究、中文综述与标准教材相关内容。",
+    "tags": ["工具"]
+  },
+  {
+    "id": "ctext",
+    "category": "数据库与检索工具",
+    "title": "中国哲学书电子化计划（ctext.org）",
+    "org": "ctext.org",
+    "year": "",
+    "url": "https://ctext.org/zhs",
+    "desc": "三万余部古籍的免费全文与检索，中医经典查证最常用的在线工具之一。",
+    "tags": ["工具"]
+  }
+]

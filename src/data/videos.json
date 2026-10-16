@@ -1,0 +1,58 @@
+{
+  "_说明": "穴位治疗视频库。键为穴位代码（见 acupoints.json）。每项字段：platform（bilibili / youtube）、id（B站填 BV 号，YouTube 填视频 ID）、title、uploader（可选）、note（可选）。详情页会为这里的条目嵌入播放器；没有条目的穴位自动显示各平台搜索直达按钮。添加方法见 README。",
+  "LI4": [
+    {
+      "platform": "bilibili",
+      "id": "BV1jj411L7nJ",
+      "title": "合谷穴：定位与主治讲解",
+      "uploader": "医者正心",
+      "note": "约19.6万播放，定位与功用科普"
+    },
+    {
+      "platform": "bilibili",
+      "id": "BV12hA6eREto",
+      "title": "【针灸临床操作】针合谷穴（郭廷英老师）",
+      "uploader": "颐和中医",
+      "note": "临床进针操作演示"
+    },
+    {
+      "platform": "bilibili",
+      "id": "BV1eYc2zgEp9",
+      "title": "合谷穴不会进针？三绝针合谷进针方法，零基础一看就会",
+      "uploader": "高春花教学高氏三绝针",
+      "note": "零基础进针教学"
+    }
+  ],
+  "ST36": [
+    {
+      "platform": "bilibili",
+      "id": "BV1mM411B7YY",
+      "title": "进针——足三里",
+      "uploader": "助阳小肉桂",
+      "note": "约4.3万播放，进针手法演示"
+    },
+    {
+      "platform": "bilibili",
+      "id": "BV1Xpa2exETz",
+      "title": "针灸医生演示针刺足三里穴",
+      "uploader": "针灸龙哥",
+      "note": "医生实操演示"
+    }
+  ],
+  "LU7": [
+    {
+      "platform": "bilibili",
+      "id": "BV1T741157AV",
+      "title": "每日一穴——列缺穴",
+      "uploader": "中国中医药出版社",
+      "note": "出版社官方科普"
+    },
+    {
+      "platform": "bilibili",
+      "id": "BV1Lm4y1L7Pd",
+      "title": "倪海厦老师：列缺穴 太渊穴",
+      "uploader": "跟名师学中医",
+      "note": "名家讲解，可对照本站古籍出处"
+    }
+  ]
+}

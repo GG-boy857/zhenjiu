@@ -1,0 +1,48 @@
+---
+import type { Meridian } from "../types";
+
+interface Props {
+  meridian: Meridian;
+}
+
+const { meridian: m } = Astro.props;
+const hasData = m.points.length > 0;
+const linkedPoints = hasData ? m.points : (m.jiaohui ?? []);
+const statusText = hasData
+  ? `共 ${m.points.length} 穴`
+  : m.jiaohui?.length
+    ? `交会 ${m.jiaohui.length} 穴`
+    : m.note
+      ? "交会穴 · 无独立经穴"
+      : "待录入";
+---
+
+<a href={`/meridians/${m.id}/`} class="paper-card group block overflow-hidden">
+  <div class="h-1.5 w-full" style={`background-color:${m.color}`}></div>
+  <div class="p-5">
+    <div class="flex items-center gap-2">
+      {
+        m.code && (
+          <span class="rounded px-1.5 py-0.5 text-xs font-bold text-paper" style={`background-color:${m.color}`}>
+            {m.code}
+          </span>
+        )
+      }
+      <h3 class="text-lg font-bold group-hover:text-vermilion">{m.name}</h3>
+    </div>
+    <p class="text-sm text-ink-faint">{m.nameEn}</p>
+    <p class="mt-2 line-clamp-2 text-sm leading-6 text-ink-soft">{m.description}</p>
+    <div class="mt-3 flex flex-wrap gap-1.5 text-xs text-ink-soft">
+      {m.category && <span class="rounded bg-paper-deep px-2 py-0.5">{m.category}</span>}
+      {m.element && <span class="rounded bg-paper-deep px-2 py-0.5">五行·{m.element}</span>}
+      {m.organ && <span class="rounded bg-paper-deep px-2 py-0.5">属{m.organ}</span>}
+      {m.time && <span class="rounded bg-paper-deep px-2 py-0.5">流注·{m.time}</span>}
+    </div>
+    <div class="mt-3" data-meridian-progress data-codes={linkedPoints.join(",")}>
+      <span data-progress-text class="text-xs text-ink-faint">{statusText}</span>
+      <div class="mt-1 h-1.5 overflow-hidden rounded-full bg-paper-deep">
+        <div data-progress-bar class="h-full rounded-full" style={`width:0%;background-color:${m.color}`}></div>
+      </div>
+    </div>
+  </div>
+</a>

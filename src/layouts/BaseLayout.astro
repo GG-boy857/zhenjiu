@@ -1,0 +1,93 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "针途——个人针灸学习站：经络穴位浏览、人体穴位图、学习笔记与复习自测" } =
+  Astro.props;
+
+const navItems = [
+  { href: "/", label: "首页" },
+  { href: "/meridians/", label: "经络" },
+  { href: "/atlas/", label: "穴位图" },
+  { href: "/review/", label: "复习" },
+  { href: "/references/", label: "文献" },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href.replace(/\/$/, ""));
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} · 针途</title>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+      <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
+        <a href="/" class="flex items-center gap-2.5">
+          <span
+            class="grid h-9 w-9 place-items-center rounded-md bg-vermilion font-bold text-xl text-paper"
+            aria-hidden="true">针</span
+          >
+          <span class="text-xl font-bold tracking-widest">针途</span>
+        </a>
+        <nav class="flex items-center gap-1 text-[15px]" aria-label="主导航">
+          {
+            navItems.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  "rounded-md px-3 py-1.5 transition-colors",
+                  isActive(item.href)
+                    ? "bg-vermilion/10 font-bold text-vermilion"
+                    : "text-ink-soft hover:bg-paper-deep hover:text-ink",
+                ]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+        <form action="/search/" method="get" role="search" class="ml-auto flex w-full max-w-xs items-center gap-2 sm:w-auto">
+          <input
+            type="search"
+            name="q"
+            placeholder="搜穴位 / 主治 / 代码，如 头痛、LI4"
+            aria-label="全局搜索"
+            class="w-full rounded-md border border-line bg-card px-3 py-1.5 text-sm outline-none placeholder:text-ink-faint focus:border-qing-soft"
+          />
+          <button type="submit" class="whitespace-nowrap rounded-md border border-line bg-card px-3 py-1.5 text-sm text-ink-soft transition-colors hover:border-qing-soft hover:text-qing">
+            搜索
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="mt-8 border-t border-line bg-paper-deep/60">
+      <div class="mx-auto max-w-5xl space-y-2 px-4 py-6 text-sm text-ink-faint">
+        <p>
+          免责声明：本站为个人学习笔记性质的静态网站，内容按国家标准与教材整理，仅供学习参考，不构成医疗建议；实际针刺请在执业医师指导下进行。
+        </p>
+        <p>
+          穴位图为手绘线稿风格的教学示意（2D 铜人），坐标非解剖精确定位 · 笔记与学习进度保存在浏览器 localStorage，请定期在首页导出备份。
+        </p>
+        <p>© 2026 针途 Zhentu · Astro + Tailwind CSS + React</p>
+      </div>
+    </footer>
+  </body>
+</html>

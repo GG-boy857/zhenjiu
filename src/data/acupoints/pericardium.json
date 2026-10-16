@@ -1,0 +1,111 @@
+{
+  "PC1": {
+    "code": "PC1",
+    "name": "天池",
+    "nameEn": "Tianchi",
+    "meridianId": "pericardium",
+    "location": "在胸部，第4肋间隙，前正中线旁开5寸",
+    "finding": "于乳头旁开1寸（锁骨中线外1寸）、第4肋间隙处取穴",
+    "indications": ["咳嗽", "气喘", "胸闷", "胁肋疼痛", "乳痈", "瘰疬"],
+    "method": "斜刺或平刺0.5~0.8寸",
+    "warning": "不可深刺，防止伤及肺脏",
+    "classics": "首载于《针灸甲乙经》，为手厥阴、足少阳交会穴",
+    "svg": { "front": [165, 242] }
+  },
+  "PC2": {
+    "code": "PC2",
+    "name": "天泉",
+    "nameEn": "Tianquan",
+    "meridianId": "pericardium",
+    "location": "在臂前区，腋前纹头下2寸，肱二头肌的长、短头之间",
+    "finding": "于腋前纹头下2寸、肱二头肌长头与短头之间取穴",
+    "indications": ["心痛", "咳嗽", "胸胁支满", "上臂内侧痛"],
+    "method": "直刺0.5~1寸，可灸",
+    "classics": "首载于《针灸甲乙经》（原称天温）",
+    "svg": { "front": [139, 260] }
+  },
+  "PC3": {
+    "code": "PC3",
+    "name": "曲泽",
+    "nameEn": "Quze",
+    "meridianId": "pericardium",
+    "location": "在肘前区，肘横纹中，肱二头肌腱的尺侧缘",
+    "finding": "仰掌微屈肘，于肘横纹中、肱二头肌腱尺侧缘取穴",
+    "indications": ["心痛", "心悸", "胃痛", "呕血", "呕吐", "热病", "中暑", "肘臂挛痛"],
+    "method": "直刺0.8~1寸，或点刺出血",
+    "classics": "首载于《灵枢·本输》，为心包经合穴，善清心火、止呕吐",
+    "svg": { "front": [130, 297] }
+  },
+  "PC4": {
+    "code": "PC4",
+    "name": "郄门",
+    "nameEn": "Ximen",
+    "meridianId": "pericardium",
+    "location": "在前臂前区，腕掌侧远端横纹上5寸，掌长肌腱与桡侧腕屈肌腱之间",
+    "finding": "仰掌，于大陵直上5寸、两肌腱之间取穴",
+    "indications": ["心痛", "心悸", "呕血", "咳血", "疔疮", "癫痫"],
+    "method": "直刺0.5~1寸，可灸",
+    "classics": "首载于《针灸甲乙经》，为心包经郄穴，治心血管急症与血证",
+    "svg": { "front": [128, 352] }
+  },
+  "PC5": {
+    "code": "PC5",
+    "name": "间使",
+    "nameEn": "Jianshi",
+    "meridianId": "pericardium",
+    "location": "在前臂前区，腕掌侧远端横纹上3寸，掌长肌腱与桡侧腕屈肌腱之间",
+    "finding": "仰掌，于大陵直上3寸、两肌腱之间取穴",
+    "indications": ["心痛", "心悸", "胃痛呕吐", "疟疾", "癫狂痫", "热病烦躁"],
+    "method": "直刺0.5~1寸，可灸",
+    "classics": "首载于《灵枢·本输》，为心包经经穴",
+    "svg": { "front": [126, 386] }
+  },
+  "PC6": {
+    "code": "PC6",
+    "name": "内关",
+    "nameEn": "Neiguan",
+    "meridianId": "pericardium",
+    "location": "在前臂前区，腕掌侧远端横纹上2寸，掌长肌腱与桡侧腕屈肌腱之间",
+    "finding": "仰掌，于腕横纹上2寸（三横指）、两筋（掌长肌腱与桡侧腕屈肌腱）之间取穴",
+    "indications": ["心痛", "心悸", "胸闷", "眩晕", "胃痛", "呕吐", "呃逆", "失眠", "癫痫", "偏瘫"],
+    "method": "直刺0.5~1寸，可透外关，可灸",
+    "classics": "首载于《灵枢·经脉》，为心包经络穴、八脉交会穴（通阴维），宽胸理气第一要穴",
+    "svg": { "front": [126, 398] }
+  },
+  "PC7": {
+    "code": "PC7",
+    "name": "大陵",
+    "nameEn": "Daling",
+    "meridianId": "pericardium",
+    "location": "在腕前区，腕掌侧远端横纹中，掌长肌腱与桡侧腕屈肌腱之间",
+    "finding": "仰掌，于腕横纹正中、两筋之间取穴",
+    "indications": ["心痛", "心悸", "胃痛", "呕吐", "癫狂", "疮疡", "胸胁痛", "腕关节痛"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《灵枢·本输》，为心包经输穴、原穴",
+    "svg": { "front": [125, 410] }
+  },
+  "PC8": {
+    "code": "PC8",
+    "name": "劳宫",
+    "nameEn": "Laogong",
+    "meridianId": "pericardium",
+    "location": "在掌区，横平第3掌指关节近端，第2、3掌骨之间偏于第3掌骨",
+    "finding": "握拳屈指，于中指尖所指掌心处（第2、3掌骨间）取穴",
+    "indications": ["中风昏迷", "中暑", "心痛", "癫狂痫", "口疮", "口臭", "鹅掌风"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《灵枢·本输》，为心包经荥穴，清心泻火开窍要穴",
+    "svg": { "front": [121, 430] }
+  },
+  "PC9": {
+    "code": "PC9",
+    "name": "中冲",
+    "nameEn": "Zhongchong",
+    "meridianId": "pericardium",
+    "location": "在手指，中指末端最高点",
+    "finding": "于中指指尖中央取穴",
+    "indications": ["中风昏迷", "中暑", "心痛", "热病", "小儿惊风", "舌强肿痛"],
+    "method": "浅刺0.1寸，或点刺出血",
+    "classics": "首载于《灵枢·本输》，为心包经井穴，急救要穴之一",
+    "svg": { "front": [121, 452] }
+  }
+}

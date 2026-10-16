@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import QuizView from "../components/QuizView.tsx";
+import MnemonicsView from "../components/MnemonicsView.tsx";
+import { acupointList, meridians } from "../lib/data";
+
+const quizPoints = acupointList.map((p) => ({
+  code: p.code,
+  name: p.name,
+  nameEn: p.nameEn,
+  location: p.location,
+  indications: p.indications,
+  method: p.method,
+  meridianId: p.meridianId,
+}));
+
+const quizMeridians = meridians
+  .filter((m) => m.points.length > 0)
+  .map((m) => ({ id: m.id, name: m.name, color: m.color }));
+---
+
+<BaseLayout title="复习自测" description="随机抽取穴位进行自测：闪卡记忆与定位选择题，附带针灸经典记忆歌诀">
+  <h1 class="section-title">复习自测</h1>
+  <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">
+    两种模式：<b>闪卡</b>——看穴名回忆定位与主治，翻面后按掌握程度自评；
+    <b>定位选择题</b>——根据穴名从四个选项中选出标准定位。
+    范围可限定单条经络；累计成绩保存在浏览器本地。
+  </p>
+
+  <div class="mt-6">
+    <QuizView client:load points={quizPoints} meridians={quizMeridians} />
+  </div>
+
+  <section class="mt-12">
+    <MnemonicsView client:load />
+  </section>
+</BaseLayout>

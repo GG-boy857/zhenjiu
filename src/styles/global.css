@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  /* 宣纸底色系 */
+  --color-paper: #f6f1e5;
+  --color-paper-deep: #ece4d0;
+  --color-card: #fbf8f0;
+  /* 墨色系 */
+  --color-ink: #2c2a26;
+  --color-ink-soft: #5c564a;
+  --color-ink-faint: #8a8272;
+  /* 线与点缀 */
+  --color-line: #d8cdb4;
+  --color-vermilion: #a83f2e;
+  --color-vermilion-soft: #c4695a;
+  --color-qing: #3e7c6f;
+  --color-qing-soft: #7fa99b;
+  --color-gold: #b08d57;
+
+  --font-song: "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN",
+    "思源宋体", "Songti SC", "STSong", "SimSun", serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper font-song text-ink antialiased;
+    background-image: radial-gradient(
+        ellipse at top,
+        rgba(255, 255, 255, 0.55),
+        transparent 60%
+      ),
+      linear-gradient(rgba(216, 205, 180, 0.14) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 28px;
+  }
+  ::selection {
+    background: rgba(168, 63, 46, 0.18);
+  }
+}
+
+/* 搜索命中高亮 */
+mark {
+  background: #f2dcc0;
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+/* 学习状态徽标 */
+.badge {
+  @apply inline-flex items-center rounded-full border px-2 py-0.5 text-xs leading-4;
+}
+.badge-learned {
+  @apply border-qing/40 bg-qing/10 font-bold text-qing;
+}
+.badge-unlearned {
+  @apply border-line bg-transparent text-ink-faint;
+}
+
+/* 章节标题：左侧朱砂竖线 */
+.section-title {
+  @apply flex items-center gap-3 text-xl font-bold tracking-wide;
+}
+.section-title::before {
+  content: "";
+  @apply block h-5 w-1.5 rounded-sm bg-vermilion;
+}
+
+/* 卡片 */
+.paper-card {
+  @apply rounded-lg border border-line bg-card shadow-sm transition-shadow;
+}
+.paper-card:hover {
+  @apply shadow-md;
+}
+
+/* 穴位图焦点脉动 */
+@keyframes zhentu-pulse {
+  0% {
+    r: 6;
+    opacity: 0.9;
+  }
+  70% {
+    r: 16;
+    opacity: 0;
+  }
+  100% {
+    r: 16;
+    opacity: 0;
+  }
+}
+.zhentu-pulse {
+  animation: zhentu-pulse 1.6s ease-out infinite;
+  fill: none;
+  stroke: var(--color-vermilion);
+  stroke-width: 2;
+}
+
+/* 3D 铜人悬停提示卡片 */
+.tip3d {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 13px;
+  border-radius: 9px;
+  border: 1px solid var(--color-line);
+  border-top: 3px solid var(--color-vermilion);
+  background: rgba(251, 248, 240, 0.97);
+  box-shadow: 0 6px 18px rgba(44, 42, 38, 0.22);
+  transform: translate(-50%, -140%);
+  opacity: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.tip3d.show {
+  animation: tip3d-pop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.tip3d b {
+  font-size: 15px;
+}
+.tip3d-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+.tip3d-code {
+  color: var(--color-ink-faint);
+  font-size: 12px;
+}
+.tip3d-hint {
+  color: var(--color-qing);
+  font-size: 11px;
+  margin-left: 2px;
+}
+@keyframes tip3d-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -108%) scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -140%) scale(1);
+  }
+}

@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MeridianCard from "../../components/MeridianCard.astro";
+import { meridians, meridiansWithData } from "../../lib/data";
+
+const withData = meridiansWithData();
+---
+
+<BaseLayout title="经络" description="按十二正经与奇经八脉浏览经络与穴位">
+  <h1 class="section-title">经络</h1>
+  <p class="mt-2 text-sm leading-7 text-ink-soft">
+    十二正经以“手太阴肺经”为始，按气血流注次序相传；奇经八脉统摄、调节十二经气血。
+    点击经络卡片查看穴位列表，灰色卡片为尚未录入数据的经络。
+  </p>
+
+  <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {meridians.map((m) => <MeridianCard meridian={m} />)}
+  </div>
+
+  <p class="mt-6 text-xs text-ink-faint">
+    当前已录入：{withData.map((m) => m.name).join("、")}（{withData.reduce((n, m) => n + m.points.length, 0)} 穴）。
+    添加新经络数据请见项目 README。
+  </p>
+</BaseLayout>
+
+<script>
+  import { readProgress, PROGRESS_EVENT } from "../../lib/progress";
+
+  function refreshMeridianProgress() {
+    const map = readProgress();
+    document.querySelectorAll<HTMLElement>("[data-meridian-progress]").forEach((el) => {
+      const codes = (el.dataset.codes ?? "").split(",").filter(Boolean);
+      const total = codes.length;
+      const done = codes.filter((c) => map[c]?.learned).length;
+      const text = el.querySelector("[data-progress-text]");
+      const bar = el.querySelector<HTMLElement>("[data-progress-bar]");
+      if (text) {
+        text.textContent = total ? `已学 ${done}/${total}` : "待录入";
+      }
+      if (bar) {
+        bar.style.width = total ? `${Math.round((done / total) * 100)}%` : "0%";
+      }
+    });
+  }
+
+  refreshMeridianProgress();
+  window.addEventListener(PROGRESS_EVENT, refreshMeridianProgress);
+</script>

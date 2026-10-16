@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AcupointCard from "../../components/AcupointCard.astro";
+import { acupoints, getMeridian, meridians, pointsOfMeridian } from "../../lib/data";
+
+export function getStaticPaths() {
+  return meridians.map((m) => ({ params: { id: m.id } }));
+}
+
+const { id } = Astro.params;
+const meridian = getMeridian(id ?? "")!;
+const points = pointsOfMeridian(meridian.id);
+const jiaohuiPoints = (meridian.jiaohui ?? [])
+  .map((c) => acupoints[c])
+  .filter(Boolean);
+const totalIndications = points.reduce((n, p) => n + p.indications.length, 0);
+---
+
+<BaseLayout title={`${meridian.name} · 经络`}>
+  <nav class="text-sm text-ink-faint" aria-label="面包屑">
+    <a href="/meridians/" class="hover:text-qing">经络</a>
+    <span class="mx-1.5">/</span>
+    <span class="text-ink">{meridian.name}</span>
+  </nav>
+
+  <!-- 经络信息头 -->
+  <section class="paper-card mt-4 overflow-hidden">
+    <div class="h-2 w-full" style={`background-color:${meridian.color}`}></div>
+    <div class="p-6 md:p-8">
+      <div class="flex flex-wrap items-center gap-3">
+        {
+          meridian.code && (
+            <span class="rounded px-2 py-1 text-sm font-bold text-paper" style={`background-color:${meridian.color}`}>
+              {meridian.code}
+            </span>
+          )
+        }
+        <h1 class="text-3xl font-bold">{meridian.name}</h1>
+        <span class="text-ink-faint">{meridian.nameEn}</span>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-1.5 text-xs text-ink-soft">
+        {meridian.category && <span class="rounded bg-paper-deep px-2 py-1">{meridian.category}</span>}
+        {meridian.yinyang && <span class="rounded bg-paper-deep px-2 py-1">{meridian.yinyang}</span>}
+        {meridian.handfoot && <span class="rounded bg-paper-deep px-2 py-1">{meridian.handfoot}经</span>}
+        {meridian.element && <span class="rounded bg-paper-deep px-2 py-1">五行·{meridian.element}</span>}
+        {meridian.organ && <span class="rounded bg-paper-deep px-2 py-1">属{meridian.organ}</span>}
+        {meridian.time && <span class="rounded bg-paper-deep px-2 py-1">流注·{meridian.time}</span>}
+        {meridian.jiaohui?.length && (
+          <span class="rounded bg-paper-deep px-2 py-1">交会穴 {meridian.jiaohui.length} 处</span>
+        )}
+      </div>
+      <p class="mt-4 max-w-3xl leading-8 text-ink-soft">{meridian.description}</p>
+    </div>
+  </section>
+
+  {
+    points.length > 0 ? (
+      <>
+        <section class="mt-8">
+          <h2 class="section-title">
+            本经穴位
+            <span class="text-sm font-normal text-ink-faint">
+              共 {points.length} 穴 · 主治条目 {totalIndications} 项
+            </span>
+          </h2>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            {points.map((p) => (
+              <AcupointCard point={p} color={meridian.color} />
+            ))}
+          </div>
+        </section>
+        <p class="mt-6 text-xs leading-5 text-ink-faint">
+          提示：卡片右上角为学习状态标记，进入穴位详情页可将穴位标记为“已学习”，进度实时同步到本页与首页。
+        </p>
+      </>
+    ) : jiaohuiPoints.length > 0 ? (
+      <>
+        <section class="mt-8">
+          <h2 class="section-title">
+            本脉交会穴位
+            <span class="text-sm font-normal text-ink-faint">
+              共 {jiaohuiPoints.length} 穴 · 穴位实体位于相关经络
+            </span>
+          </h2>
+          <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">{meridian.note}</p>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            {jiaohuiPoints.map((p) => (
+              <AcupointCard point={p} color={meridian.color} />
+            ))}
+          </div>
+        </section>
+        <p class="mt-6 text-xs leading-5 text-ink-faint">
+          提示：交会穴的学习进度与经络筛选联动——在穴位图中选中本脉，会以循行虚线高亮这些交会穴位。
+        </p>
+      </>
+    ) : (
+      <section class="paper-card mt-8 p-10 text-center">
+        <p class="text-2xl font-bold">{meridian.note ? "本脉无独立经穴" : "本经穴位数据待录入"}</p>
+        <p class="mx-auto mt-3 max-w-md text-sm leading-7 text-ink-faint">
+          {
+            meridian.note ??
+              "经络条目与循行描述已就绪，穴位数据将按 GB/T 12346 逐步补录。你也可以按照 README 中的说明自行添加本经穴位。"
+          }
+        </p>
+        <a
+          href="/atlas/"
+          class="mt-5 inline-block rounded-md border border-line px-5 py-2 text-sm text-ink-soft hover:border-qing-soft hover:text-qing"
+        >
+          先去穴位图看看其他经络 →
+        </a>
+      </section>
+    )
+  }
+</BaseLayout>

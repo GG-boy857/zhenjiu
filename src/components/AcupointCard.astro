@@ -1,0 +1,52 @@
+---
+import type { Acupoint } from "../types";
+
+interface Props {
+  point: Acupoint;
+  color: string;
+}
+
+const { point, color } = Astro.props;
+---
+
+<a href={`/acupoints/${point.code}/`} class="paper-card block p-4">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="rounded px-1.5 py-0.5 text-xs font-bold text-paper" style={`background-color:${color}`}>
+      {point.code}
+    </span>
+    <span class="text-lg font-bold">{point.name}</span>
+    <span class="text-sm text-ink-faint">{point.nameEn}</span>
+    <span class="badge badge-unlearned ml-auto" data-learned-badge data-code={point.code}>未学习</span>
+  </div>
+  <p class="mt-2 line-clamp-1 text-sm text-ink-soft">{point.location}</p>
+  <div class="mt-2 flex flex-wrap gap-1">
+    {
+      point.indications.slice(0, 4).map((i) => (
+        <span class="rounded bg-paper-deep px-1.5 py-0.5 text-xs">{i}</span>
+      ))
+    }
+    {
+      point.indications.length > 4 && (
+        <span class="px-1 py-0.5 text-xs text-ink-faint">+{point.indications.length - 4}</span>
+      )
+    }
+  </div>
+</a>
+
+<script>
+  import { readProgress, PROGRESS_EVENT } from "../lib/progress";
+
+  function refreshLearnedBadges() {
+    const map = readProgress();
+    document.querySelectorAll<HTMLElement>("[data-learned-badge]").forEach((el) => {
+      const code = el.dataset.code ?? "";
+      const learned = map[code]?.learned === true;
+      el.textContent = learned ? "已学习" : "未学习";
+      el.classList.toggle("badge-learned", learned);
+      el.classList.toggle("badge-unlearned", !learned);
+    });
+  }
+
+  refreshLearnedBadges();
+  window.addEventListener(PROGRESS_EVENT, refreshLearnedBadges);
+</script>

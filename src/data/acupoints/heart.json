@@ -1,0 +1,110 @@
+{
+  "HT1": {
+    "code": "HT1",
+    "name": "极泉",
+    "nameEn": "Jiquan",
+    "meridianId": "heart",
+    "location": "在腋区，腋窝中央，腋动脉搏动处",
+    "finding": "上臂外展，于腋窝顶点、腋动脉搏动处取穴",
+    "indications": ["心痛", "心悸", "胸闷气短", "胁肋疼痛", "肩臂疼痛", "上肢不遂"],
+    "method": "避开腋动脉，直刺或斜刺0.3~0.5寸",
+    "classics": "首载于《针灸甲乙经》，为心经首穴",
+    "svg": { "front": [150, 205] }
+  },
+  "HT2": {
+    "code": "HT2",
+    "name": "青灵",
+    "nameEn": "Qingling",
+    "meridianId": "heart",
+    "location": "在臂前区，肘横纹上3寸，肱二头肌的内侧沟中",
+    "finding": "于少海直上3寸、肱二头肌内侧沟处取穴",
+    "indications": ["心痛", "胁痛", "肩臂疼痛"],
+    "method": "直刺0.5~1寸，可灸",
+    "classics": "首载于《针灸甲乙经》（原称青灵泉）",
+    "svg": { "front": [139, 248] }
+  },
+  "HT3": {
+    "code": "HT3",
+    "name": "少海",
+    "nameEn": "Shaohai",
+    "meridianId": "heart",
+    "location": "在肘前区，横平肘横纹，肱骨内上髁前缘",
+    "finding": "屈肘，于肘横纹内侧端与肱骨内上髁连线中点处取穴",
+    "indications": ["心痛", "肘臂挛痛麻木", "手颤", "瘰疬", "头项痛", "失眠健忘"],
+    "method": "直刺0.5~1寸，可灸",
+    "classics": "首载于《针灸甲乙经》，为心经合穴",
+    "svg": { "front": [134, 297] }
+  },
+  "HT4": {
+    "code": "HT4",
+    "name": "灵道",
+    "nameEn": "Lingdao",
+    "meridianId": "heart",
+    "location": "在前臂前区，腕掌侧远端横纹上1.5寸，尺侧腕屈肌腱的桡侧缘",
+    "finding": "仰掌，于神门上1.5寸、尺侧腕屈肌腱桡侧缘取穴",
+    "indications": ["心痛", "暴喑", "肘臂挛痛"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《灵枢·本输》，为心经经穴",
+    "svg": { "front": [132, 370] }
+  },
+  "HT5": {
+    "code": "HT5",
+    "name": "通里",
+    "nameEn": "Tongli",
+    "meridianId": "heart",
+    "location": "在前臂前区，腕掌侧远端横纹上1寸，尺侧腕屈肌腱的桡侧缘",
+    "finding": "仰掌，于神门上1寸处取穴",
+    "indications": ["心悸怔忡", "暴喑", "舌强不语", "腕臂痛", "失眠"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《灵枢·经脉》，为心经络穴，善治心舌之疾",
+    "svg": { "front": [131, 385] }
+  },
+  "HT6": {
+    "code": "HT6",
+    "name": "阴郄",
+    "nameEn": "Yinxi",
+    "meridianId": "heart",
+    "location": "在前臂前区，腕掌侧远端横纹上0.5寸，尺侧腕屈肌腱的桡侧缘",
+    "finding": "仰掌，于神门上0.5寸处取穴",
+    "indications": ["心痛", "惊悸", "骨蒸盗汗", "吐血衄血", "暴喑"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《针灸甲乙经》，为心经郄穴，治盗汗要穴",
+    "svg": { "front": [130, 395] }
+  },
+  "HT7": {
+    "code": "HT7",
+    "name": "神门",
+    "nameEn": "Shenmen",
+    "meridianId": "heart",
+    "location": "在腕前区，腕掌侧远端横纹尺侧端，尺侧腕屈肌腱的桡侧缘",
+    "finding": "仰掌，于腕横纹尺侧端、尺侧腕屈肌腱桡侧凹陷处取穴",
+    "indications": ["失眠", "健忘", "心悸", "心痛", "癫狂痫", "胸胁痛"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《灵枢·本输》（原称兑冲），为心经输穴、原穴，宁心安神第一要穴",
+    "svg": { "front": [129, 405] }
+  },
+  "HT8": {
+    "code": "HT8",
+    "name": "少府",
+    "nameEn": "Shaofu",
+    "meridianId": "heart",
+    "location": "在掌区，横平第5掌指关节近端，第4、5掌骨之间",
+    "finding": "握拳，于小指尖下凹陷处取穴（劳宫尺侧）",
+    "indications": ["心悸", "胸痛", "阴痒", "阴痛", "小便不利", "掌中热"],
+    "method": "直刺0.3~0.5寸，可灸",
+    "classics": "首载于《灵枢·本输》，为心经荥穴",
+    "svg": { "front": [122, 430] }
+  },
+  "HT9": {
+    "code": "HT9",
+    "name": "少冲",
+    "nameEn": "Shaochong",
+    "meridianId": "heart",
+    "location": "在手指，小指末节桡侧，指甲根角侧上方0.1寸（指寸）",
+    "finding": "沿小指指甲桡侧画一直线与指甲基底部水平线相交处取穴",
+    "indications": ["心悸", "心痛", "癫狂", "热病", "昏迷"],
+    "method": "浅刺0.1寸，或点刺出血",
+    "classics": "首载于《灵枢·本输》（原称经始），为心经井穴",
+    "svg": { "front": [127, 452] }
+  }
+}

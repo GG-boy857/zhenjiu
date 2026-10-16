@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import referencesJson from "../data/references.json";
+
+type Reference = {
+  id: string;
+  category: string;
+  title: string;
+  org: string;
+  year: string;
+  url: string;
+  desc: string;
+  tags: string[];
+};
+
+const references = referencesJson as unknown as Reference[];
+
+const categories = [...new Set(references.map((r) => r.category))];
+const categoryDesc: Record<string, string> = {
+  "国际与国家标准": "穴位定位与名称的权威依据，本站定位描述的整理基准。",
+  "经典古籍（在线全文）": "免费、可检索的古籍全文，用于核对穴位出处与原文。",
+  "循证研究与综述": "了解针刺疗效证据现状，建立平衡、审慎的认识。",
+  "视频课程": "取穴演示与系统课程入口，配合本站自测功能使用。",
+  "数据库与检索工具": "按穴位名、病名继续深挖文献的入口。",
+};
+---
+
+<BaseLayout title="文献知识库" description="针灸穴位治疗的权威文献、标准、古籍全文、循证综述与视频课程导航">
+  <h1 class="section-title">文献知识库</h1>
+  <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">
+    这里汇总自学针灸常用的权威资料：定位标准、古籍全文、循证综述、视频课程与检索工具。
+    每个穴位详情页底部的「文献与延伸阅读」会按穴位名自动生成对应检索链接，与本页配合使用。
+  </p>
+
+  {
+    categories.map((cat) => (
+      <section class="mt-8">
+        <h2 class="section-title text-lg">{cat}</h2>
+        {categoryDesc[cat] && <p class="mt-1.5 text-sm text-ink-faint">{categoryDesc[cat]}</p>}
+        <div class="mt-4 grid gap-3 md:grid-cols-2">
+          {references
+            .filter((r) => r.category === cat)
+            .map((r) => (
+              <article class="paper-card flex h-full flex-col p-4">
+                <div class="flex items-start justify-between gap-3">
+                  <h3 class="font-bold leading-snug">{r.title}</h3>
+                  {r.year && (
+                    <span class="shrink-0 rounded bg-paper-deep px-2 py-0.5 text-xs text-ink-soft">
+                      {r.year}
+                    </span>
+                  )}
+                </div>
+                <p class="mt-1 text-xs text-ink-faint">{r.org}</p>
+                <p class="mt-2 flex-1 text-sm leading-6 text-ink-soft">{r.desc}</p>
+                <a
+                  href={r.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-3 inline-flex w-fit items-center gap-1 rounded-md border border-line px-3 py-1.5 text-sm text-qing transition-colors hover:border-qing-soft hover:bg-qing/5"
+                >
+                  打开资料 ↗
+                </a>
+              </article>
+            ))}
+        </div>
+      </section>
+    ))
+  }
+
+  <p class="mt-8 text-xs leading-5 text-ink-faint">
+    说明：链接指向第三方权威平台，内容归原作者与机构所有；引用条目仅供个人学习参考，不构成医疗建议。想新增条目，编辑
+    src/data/references.json 即可。
+  </p>
+</BaseLayout>

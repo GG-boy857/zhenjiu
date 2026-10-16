@@ -1,0 +1,29 @@
+{
+  "name": "zhentu-acupuncture",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "针途 —— 个人针灸学习站：经络穴位浏览、人体穴位图、学习笔记与复习自测",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.2.0",
+    "@tailwindcss/vite": "^4.1.4",
+    "@types/three": "^0.186.0",
+    "astro": "^5.7.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.1.4",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "playwright-core": "^1.63.0",
+    "typescript": "^5.7.0"
+  }
+}

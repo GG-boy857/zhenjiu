@@ -1,0 +1,194 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NotesEditor from "../../components/NotesEditor.tsx";
+import StudyToggle from "../../components/StudyToggle.tsx";
+import VideoSection from "../../components/VideoSection.astro";
+import ReferenceLinks from "../../components/ReferenceLinks.astro";
+import { acupoints, getMeridian, meridians } from "../../lib/data";
+
+export function getStaticPaths() {
+  return Object.keys(acupoints).map((code) => ({ params: { code } }));
+}
+
+const { code } = Astro.params;
+const point = acupoints[code ?? ""]!;
+const meridian = getMeridian(point.meridianId)!;
+
+const siblings = meridian.points;
+const pos = siblings.indexOf(point.code);
+const prev = pos > 0 ? siblings[pos - 1] : null;
+const next = pos >= 0 && pos < siblings.length - 1 ? siblings[pos + 1] : null;
+const indexInMeridian = pos + 1;
+
+const infoRows: { label: string; value: string }[] = [
+  { label: "标准定位", value: point.location },
+  { label: "取穴方法", value: point.finding },
+  { label: "针灸操作", value: point.method },
+];
+---
+
+<BaseLayout title={`${point.name}（${point.code}）· ${meridian.name}`}>
+  <nav class="text-sm text-ink-faint" aria-label="面包屑">
+    <a href="/meridians/" class="hover:text-qing">经络</a>
+    <span class="mx-1.5">/</span>
+    <a href={`/meridians/${meridian.id}/`} class="hover:text-qing">{meridian.name}</a>
+    <span class="mx-1.5">/</span>
+    <span class="text-ink">{point.name}</span>
+  </nav>
+
+  <!-- 穴位信息头 -->
+  <section class="paper-card mt-4 overflow-hidden">
+    <div class="h-2 w-full" style={`background-color:${meridian.color}`}></div>
+    <div class="p-6 md:p-8">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="rounded px-2 py-1 text-sm font-bold text-paper" style={`background-color:${meridian.color}`}>
+          {point.code}
+        </span>
+        <h1 class="text-4xl font-bold">{point.name}</h1>
+        <span class="text-lg text-ink-faint">{point.nameEn}</span>
+      </div>
+      <div class="mt-3 flex flex-wrap gap-1.5 text-xs text-ink-soft">
+        <a
+          href={`/meridians/${meridian.id}/`}
+          class="inline-flex items-center gap-1.5 rounded bg-paper-deep px-2 py-1 hover:text-qing"
+        >
+          <span class="h-2 w-2 rounded-full" style={`background-color:${meridian.color}`}></span>
+          {meridian.name} · 第 {indexInMeridian} 穴
+        </a>
+        {meridian.element && <span class="rounded bg-paper-deep px-2 py-1">五行·{meridian.element}</span>}
+        {meridian.time && <span class="rounded bg-paper-deep px-2 py-1">流注·{meridian.time}</span>}
+      </div>
+    </div>
+  </section>
+
+  <div class="mt-6 grid gap-6 lg:grid-cols-3">
+    <!-- 主信息 -->
+    <div class="space-y-4 lg:col-span-2">
+      {
+        infoRows.map((row) => (
+          <section class="paper-card p-5">
+            <h2 class="section-title text-lg">{row.label}</h2>
+            <p class="mt-2.5 leading-8 text-[15px]">{row.value}</p>
+          </section>
+        ))
+      }
+
+      <section class="paper-card p-5">
+        <h2 class="section-title text-lg">主治病症</h2>
+        <div class="mt-3 flex flex-wrap gap-2">
+          {
+            point.indications.map((i) => (
+              <span class="rounded-md border border-line bg-paper px-3 py-1.5 text-[15px]">{i}</span>
+            ))
+          }
+        </div>
+        <p class="mt-3 text-xs text-ink-faint">
+          想按病症找穴位？试试
+          <a href="/search/" class="text-qing hover:underline">全局搜索</a>。
+        </p>
+      </section>
+
+      <VideoSection code={point.code} name={point.name} nameEn={point.nameEn} />
+
+      {
+        point.warning && (
+          <section class="rounded-lg border border-vermilion/40 bg-vermilion/5 p-5">
+            <h2 class="flex items-center gap-2 text-lg font-bold text-vermilion">
+              <span aria-hidden="true">⚠</span> 注意事项
+            </h2>
+            <p class="mt-2 leading-8 text-[15px]">{point.warning}</p>
+          </section>
+        )
+      }
+
+      <section class="paper-card p-5">
+        <h2 class="section-title text-lg">古籍出处</h2>
+        <p class="mt-2.5 leading-8 text-[15px] text-ink-soft">{point.classics}</p>
+      </section>
+
+      <ReferenceLinks name={point.name} nameEn={point.nameEn} />
+    </div>
+
+    <!-- 侧栏 -->
+    <aside class="space-y-4">
+      <div class="paper-card space-y-3 p-5">
+        <h2 class="text-sm font-bold text-ink-faint">学习状态</h2>
+        <StudyToggle client:load code={point.code} name={point.name} />
+      </div>
+
+      <div class="paper-card p-5">
+        <h2 class="text-sm font-bold text-ink-faint">人体穴位定位</h2>
+        <p class="mt-2 text-sm leading-6 text-ink-soft">
+          在 3D 针灸铜人或 2D 铜人图谱上查看「{point.name}」的空间分布与解剖位置。
+        </p>
+        <div class="mt-3 flex flex-col gap-2">
+          <a
+            href={`/?focus=${point.code}#bronze3d`}
+            class="inline-flex items-center justify-center gap-1.5 rounded-md bg-vermilion px-4 py-2 text-sm font-bold text-paper transition-colors hover:bg-vermilion-soft"
+          >
+            <span>在 3D 铜人中特写 →</span>
+          </a>
+          <a
+            href={`/atlas/?focus=${point.code}`}
+            class="inline-flex items-center justify-center gap-1.5 rounded-md border border-line bg-card px-4 py-2 text-sm font-bold text-ink-soft transition-colors hover:border-qing-soft hover:text-qing"
+          >
+            <span>打开 2D 穴位图定位</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="paper-card p-5 text-sm">
+        <h2 class="text-sm font-bold text-ink-faint">本经穴位 · 快速切换</h2>
+        <div class="mt-3 flex flex-wrap gap-1.5">
+          {
+            siblings.map((c, i) => (
+              <a
+                href={`/acupoints/${c}/`}
+                class:list={[
+                  "rounded border px-2 py-1 text-xs transition-colors",
+                  c === point.code
+                    ? "border-transparent font-bold text-paper"
+                    : "border-line text-ink-soft hover:border-qing-soft hover:text-qing",
+                ]}
+                style={c === point.code ? `background-color:${meridian.color}` : undefined}
+                title={acupoints[c]?.name ?? ""}
+              >
+                {c}
+                <span class="sr-only">· {acupoints[c]?.name}</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 笔记 -->
+  <section class="mt-6">
+    <NotesEditor client:load code={point.code} name={point.name} />
+  </section>
+
+  <!-- 上一穴 / 下一穴 -->
+  <nav class="mt-8 flex items-center justify-between gap-4" aria-label="穴位翻页">
+    {
+      prev ? (
+        <a href={`/acupoints/${prev}/`} class="paper-card flex-1 p-4 hover:border-qing-soft">
+          <p class="text-xs text-ink-faint">← 上一穴 {acupoints[prev]?.code}</p>
+          <p class="mt-1 font-bold">{acupoints[prev]?.name}</p>
+        </a>
+      ) : (
+        <span class="flex-1" />
+      )
+    }
+    {
+      next ? (
+        <a href={`/acupoints/${next}/`} class="paper-card flex-1 p-4 text-right hover:border-qing-soft">
+          <p class="text-xs text-ink-faint">下一穴 {acupoints[next]?.code} →</p>
+          <p class="mt-1 font-bold">{acupoints[next]?.name}</p>
+        </a>
+      ) : (
+        <span class="flex-1" />
+      )
+    }
+  </nav>
+</BaseLayout>

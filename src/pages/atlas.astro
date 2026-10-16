@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AtlasView from "../components/AtlasView.tsx";
+import { acupointList, getMeridian, meridians } from "../lib/data";
+
+const atlasPoints = acupointList
+  .filter((p) => p.svg.front || p.svg.back)
+  .map((p) => ({
+    code: p.code,
+    name: p.name,
+    nameEn: p.nameEn,
+    meridianId: p.meridianId,
+    color: getMeridian(p.meridianId)?.color ?? "#8a8272",
+    front: p.svg.front,
+    back: p.svg.back,
+  }));
+
+const atlasMeridians = meridians
+  .filter((m) => m.points.length > 0 || m.jiaohui?.length)
+  .map((m) => ({
+    id: m.id,
+    name: m.name,
+    code: m.code,
+    color: m.color,
+    jiaohui: m.jiaohui,
+    pathFront: m.path?.front,
+    pathBack: m.path?.back,
+  }));
+---
+
+<BaseLayout title="人体穴位图" description="在简化人体轮廓上查看穴位位置，支持按经络高亮与正背面切换">
+  <h1 class="section-title">人体穴位图</h1>
+  <p class="mt-2 max-w-3xl text-sm leading-7 text-ink-soft">
+    手绘线稿风格的 2D 铜人图：每个圆点是一个穴位（左右对称），鼠标悬停显示名称，点击进入穴位详情页；
+    点击上方经络按钮可只高亮该经穴位。<b>滚轮或 ＋/− 按钮可放大特写，放大后拖拽即可平移</b>（双指拖动在触屏上同样有效）。
+    当前已展示 {atlasPoints.length} 个有坐标数据的穴位。
+  </p>
+
+  <div class="mt-6">
+    <AtlasView client:load points={atlasPoints} meridians={atlasMeridians} />
+  </div>
+
+  <p class="mt-6 text-xs leading-5 text-ink-faint">
+    背面视图为后续督脉、膀胱经等经络预留，录入数据后即可使用。坐标为教学示意级别，取穴请以文字定位描述与国家标准为准。
+  </p>
+</BaseLayout>
