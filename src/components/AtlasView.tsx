@@ -52,6 +52,9 @@ interface HoverInfo {
 const toPathD = (pts: [number, number][]) =>
   pts.map(([x, y], i) => `${i === 0 ? "M" : "L"} ${x},${y}`).join(" ");
 
+const withBase = (p: string) =>
+  (import.meta.env.BASE_URL.replace(/\/$/, "") || "") + p;
+
 export default function AtlasView({
   points,
   meridians,
@@ -213,7 +216,7 @@ export default function AtlasView({
         nodes.push(
           <a
             key={`${p.code}-${x}`}
-            href={`/acupoints/${p.code}/`}
+            href={withBase(`/acupoints/${p.code}/`)}
             aria-label={`${p.name}（${p.code}）`}
             className="cursor-pointer"
             onMouseEnter={() => setHover({ point: p, x, y: coord[1] })}
@@ -492,13 +495,13 @@ export default function AtlasView({
                 <p className="text-sm text-ink-faint">{infoPoint.nameEn}</p>
                 <div className="mt-3 flex flex-col gap-1.5">
                   <a
-                    href={`/acupoints/${infoPoint.code}/`}
+                    href={withBase(`/acupoints/${infoPoint.code}/`)}
                     className="inline-block rounded-md bg-vermilion px-3 py-1.5 text-center text-sm font-bold text-paper transition-colors hover:bg-vermilion-soft"
                   >
                     查看详情 →
                   </a>
                   <a
-                    href={`/?focus=${infoPoint.code}#bronze3d`}
+                    href={`${withBase("/")}?focus=${infoPoint.code}#bronze3d`}
                     className="inline-block rounded-md border border-line bg-card px-3 py-1 text-center text-xs font-bold text-ink-soft transition-colors hover:border-qing-soft hover:text-qing"
                   >
                     在 3D 铜人中特写 →

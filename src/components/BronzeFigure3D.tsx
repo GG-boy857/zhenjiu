@@ -616,7 +616,8 @@ export default function BronzeFigure3D({
         const sp = getHit(e);
         if (sp) {
           const p = sp.userData.point as BronzePoint;
-          window.location.href = `/acupoints/${p.code}/`;
+          const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+          window.location.href = `${base}/acupoints/${p.code}/`;
         }
       }
     };
@@ -757,7 +758,7 @@ export default function BronzeFigure3D({
     return (
       <div className="p-10 text-center text-sm text-ink-soft">
         当前浏览器不支持 WebGL，无法显示 3D 铜人。请改用
-        <a href="/atlas/" className="mx-1 text-qing hover:underline">
+        <a href={`${import.meta.env.BASE_URL}/atlas/`} className="mx-1 text-qing hover:underline">
           2D 穴位图
         </a>
         浏览穴位。

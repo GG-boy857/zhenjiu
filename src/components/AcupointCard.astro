@@ -9,7 +9,7 @@ interface Props {
 const { point, color } = Astro.props;
 ---
 
-<a href={`/acupoints/${point.code}/`} class="paper-card block p-4">
+<a href={`${import.meta.env.BASE_URL}/acupoints/${point.code}/`} class="paper-card block p-4">
   <div class="flex flex-wrap items-center gap-2">
     <span class="rounded px-1.5 py-0.5 text-xs font-bold text-paper" style={`background-color:${color}`}>
       {point.code}

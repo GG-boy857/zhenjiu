@@ -45,6 +45,7 @@ const quickLinks = [
   { href: "/review/", title: "复习自测", desc: "闪卡与定位选择题，检验学习成果" },
   { href: "/search/", title: "全局搜索", desc: "按穴名、拼音、代码或主治检索" },
 ];
+const withBase = (p: string) => import.meta.env.BASE_URL.replace(/\/$/, "") + p;
 ---
 
 <BaseLayout title="首页">
@@ -57,10 +58,10 @@ const quickLinks = [
       这里收录我自学的经络穴位笔记——数据按国家标准整理，进度保存在本地浏览器，随时可查、可测、可备份。
     </p>
     <div class="mt-6 flex flex-wrap gap-3">
-      <a href="/meridians/lung/" class="rounded-md bg-vermilion px-5 py-2.5 font-bold text-paper transition-colors hover:bg-vermilion-soft">
+      <a href={withBase("/meridians/lung/")} class="rounded-md bg-vermilion px-5 py-2.5 font-bold text-paper transition-colors hover:bg-vermilion-soft">
         从肺经开始学 →
       </a>
-      <a href="/atlas/" class="rounded-md border border-line bg-card px-5 py-2.5 font-bold text-ink-soft transition-colors hover:border-qing-soft hover:text-qing">
+      <a href={withBase("/atlas/")} class="rounded-md border border-line bg-card px-5 py-2.5 font-bold text-ink-soft transition-colors hover:border-qing-soft hover:text-qing">
         打开穴位图
       </a>
     </div>
@@ -85,7 +86,7 @@ const quickLinks = [
       拖拽旋转、滚轮缩放、悬停查看穴位名称、点击进入详情页；右上按钮可转至正面或背面，
       并支持「皮肤 / 肌肉」图层切换——肌肉视图下皮肤半透明，可观察穴位深部的肌肉结构。
       361 穴经射线投射吸附于真实人体体表（按 GB/T 12346 相对位置定位），属教学示意，精确取穴以各穴文字定位为准。
-      解剖网格数据来源 BodyParts3D（CC BY-SA 2.1 JP），署名见 <a href="/ATTRIBUTION.md" class="text-qing hover:underline" target="_blank" rel="noopener noreferrer">ATTRIBUTION.md</a>。
+      解剖网格数据来源 BodyParts3D（CC BY-SA 2.1 JP），署名见 <a href={`${import.meta.env.BASE_URL}/ATTRIBUTION.md`} class="text-qing hover:underline" target="_blank" rel="noopener noreferrer">ATTRIBUTION.md</a>。
     </p>
     <div id="bronze3d" class="paper-card overflow-hidden">
       <BronzeFigure3D client:visible points={bronzePoints} meridians={bronzeMeridians} />
@@ -97,7 +98,7 @@ const quickLinks = [
     <div class="grid gap-3 sm:grid-cols-2">
       {
         quickLinks.map((l) => (
-          <a href={l.href} class="paper-card block p-4">
+          <a href={withBase(l.href)} class="paper-card block p-4">
             <h3 class="font-bold group-hover:text-vermilion">{l.title}</h3>
             <p class="mt-1 text-xs leading-5 text-ink-faint">{l.desc}</p>
           </a>
@@ -114,7 +115,7 @@ const quickLinks = [
       {
         meridians.map((m) => (
           <a
-            href={`/meridians/${m.id}/`}
+            href={withBase(`/meridians/${m.id}/`)}
             class:list={[
               "flex items-center gap-2 rounded-md border border-line bg-card px-3 py-2 text-sm transition-colors hover:border-ink-soft",
               m.points.length === 0 && !m.jiaohui?.length && "opacity-55",

@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+const withBase = (p: string) =>
+  (import.meta.env.BASE_URL.replace(/\/$/, "") || "") + p;
+
 export interface MnemonicItem {
   id: string;
   title: string;
@@ -288,7 +291,7 @@ export default function MnemonicsView() {
                     className="inline-flex items-center gap-1.5 rounded border border-line bg-card px-2.5 py-1 text-xs shadow-2xs"
                   >
                     <a
-                      href={`/acupoints/${p.code}/`}
+                      href={withBase(`/acupoints/${p.code}/`)}
                       className="font-bold text-ink hover:text-vermilion"
                       title={`${p.name}（${p.code}）详情`}
                     >
@@ -298,7 +301,7 @@ export default function MnemonicsView() {
                       </span>
                     </a>
                     <a
-                      href={`/?focus=${p.code}#bronze3d`}
+                      href={`${withBase("/")}?focus=${p.code}#bronze3d`}
                       className="text-[11px] text-qing hover:underline"
                       title={`在 3D 铜人中查看 ${p.name}`}
                     >

@@ -12,8 +12,7 @@
  */
 import * as THREE from "three";
 
-const BASE = "/models/anatomy/";
-/** 本站铜人：身高 3.25 世界单位，足底 y=-1.62 */
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, "") + "/models/anatomy/";/** 本站铜人：身高 3.25 世界单位，足底 y=-1.62 */
 const TARGET_HEIGHT = 3.25;
 const FOOT_Y = -1.62;
 

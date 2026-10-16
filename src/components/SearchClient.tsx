@@ -1,6 +1,9 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { searchPoints, splitHighlight, type SearchDoc } from "../lib/search";
 
+const withBase = (p: string) =>
+  (import.meta.env.BASE_URL.replace(/\/$/, "") || "") + p;
+
 function Hl({ text, q }: { text: string; q: string }) {
   const parts = splitHighlight(text, q);
   return (
@@ -75,7 +78,7 @@ export default function SearchClient({ index }: { index: SearchDoc[] }) {
         {results.map(({ doc, matched }) => (
           <li key={doc.code}>
             <a
-              href={`/acupoints/${doc.code}/`}
+              href={withBase(`/acupoints/${doc.code}/`)}
               className="paper-card block h-full p-4 hover:border-qing-soft"
             >
               <div className="flex items-center gap-2">

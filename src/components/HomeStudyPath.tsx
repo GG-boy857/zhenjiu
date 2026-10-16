@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { PROGRESS_EVENT, countLearnedAmong } from "../lib/progress";
 
+const withBase = (p: string) =>
+  (import.meta.env.BASE_URL.replace(/\/$/, "") || "") + p;
+
 export interface StudyPathItem {
   id: string;
   name: string;
@@ -34,7 +37,7 @@ export default function HomeStudyPath({ items }: { items: StudyPathItem[] }) {
         return (
           <a
             key={item.id}
-            href={`/meridians/${item.id}/`}
+            href={withBase(`/meridians/${item.id}/`)}
             className="paper-card group block overflow-hidden"
           >
             <div className="h-1.5 w-full" style={{ backgroundColor: item.color }} />

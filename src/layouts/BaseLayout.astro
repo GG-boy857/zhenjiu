@@ -18,8 +18,11 @@ const navItems = [
 ];
 
 const path = Astro.url.pathname;
+const withBase = (p: string) => import.meta.env.BASE_URL.replace(/\/$/, "") + (p === "/" ? "/" : p);
 const isActive = (href: string) =>
-  href === "/" ? path === "/" : path.startsWith(href.replace(/\/$/, ""));
+  href === "/"
+    ? path === import.meta.env.BASE_URL || path === import.meta.env.BASE_URL.replace(/\/$/, "") + "/"
+    : path.startsWith(withBase(href).replace(/\/$/, ""));
 ---
 
 <!doctype html>
@@ -29,13 +32,13 @@ const isActive = (href: string) =>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
     <title>{title} · 针途</title>
   </head>
   <body class="flex min-h-screen flex-col">
     <header class="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
       <div class="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3">
-        <a href="/" class="flex items-center gap-2.5">
+        <a href={import.meta.env.BASE_URL} class="flex items-center gap-2.5">
           <span
             class="grid h-9 w-9 place-items-center rounded-md bg-vermilion font-bold text-xl text-paper"
             aria-hidden="true">针</span
@@ -46,7 +49,7 @@ const isActive = (href: string) =>
           {
             navItems.map((item) => (
               <a
-                href={item.href}
+                href={withBase(item.href)}
                 class:list={[
                   "rounded-md px-3 py-1.5 transition-colors",
                   isActive(item.href)
@@ -59,7 +62,7 @@ const isActive = (href: string) =>
             ))
           }
         </nav>
-        <form action="/search/" method="get" role="search" class="ml-auto flex w-full max-w-xs items-center gap-2 sm:w-auto">
+        <form action={`${import.meta.env.BASE_URL}/search/`} method="get" role="search" class="ml-auto flex w-full max-w-xs items-center gap-2 sm:w-auto">
           <input
             type="search"
             name="q"

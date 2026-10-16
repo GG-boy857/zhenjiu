@@ -14,11 +14,12 @@ const jiaohuiPoints = (meridian.jiaohui ?? [])
   .map((c) => acupoints[c])
   .filter(Boolean);
 const totalIndications = points.reduce((n, p) => n + p.indications.length, 0);
+const withBase = (p: string) => import.meta.env.BASE_URL.replace(/\/$/, "") + p;
 ---
 
 <BaseLayout title={`${meridian.name} · 经络`}>
   <nav class="text-sm text-ink-faint" aria-label="面包屑">
-    <a href="/meridians/" class="hover:text-qing">经络</a>
+    <a href={withBase("/meridians/")} class="hover:text-qing">经络</a>
     <span class="mx-1.5">/</span>
     <span class="text-ink">{meridian.name}</span>
   </nav>
@@ -103,7 +104,7 @@ const totalIndications = points.reduce((n, p) => n + p.indications.length, 0);
           }
         </p>
         <a
-          href="/atlas/"
+          href={withBase("/atlas/")}
           class="mt-5 inline-block rounded-md border border-line px-5 py-2 text-sm text-ink-soft hover:border-qing-soft hover:text-qing"
         >
           先去穴位图看看其他经络 →

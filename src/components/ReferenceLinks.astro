@@ -33,7 +33,7 @@ const links = [
 <section class="paper-card p-5">
   <div class="flex flex-wrap items-center justify-between gap-2">
     <h2 class="section-title text-lg">文献与延伸阅读</h2>
-    <a href="/references/" class="text-sm text-qing hover:underline">文献知识库 →</a>
+    <a href={`${import.meta.env.BASE_URL}/references/`} class="text-sm text-qing hover:underline">文献知识库 →</a>
   </div>
   <p class="mt-3 text-sm leading-7 text-ink-soft">
     以下按「{name}（{nameEn}）」自动生成权威数据库检索链接，可查临床试验、系统评价与古籍原文。

@@ -25,13 +25,14 @@ const infoRows: { label: string; value: string }[] = [
   { label: "取穴方法", value: point.finding },
   { label: "针灸操作", value: point.method },
 ];
+const withBase = (p: string) => import.meta.env.BASE_URL.replace(/\/$/, "") + p;
 ---
 
 <BaseLayout title={`${point.name}（${point.code}）· ${meridian.name}`}>
   <nav class="text-sm text-ink-faint" aria-label="面包屑">
-    <a href="/meridians/" class="hover:text-qing">经络</a>
+    <a href={withBase("/meridians/")} class="hover:text-qing">经络</a>
     <span class="mx-1.5">/</span>
-    <a href={`/meridians/${meridian.id}/`} class="hover:text-qing">{meridian.name}</a>
+    <a href={withBase(`/meridians/${meridian.id}/`)} class="hover:text-qing">{meridian.name}</a>
     <span class="mx-1.5">/</span>
     <span class="text-ink">{point.name}</span>
   </nav>
@@ -49,7 +50,7 @@ const infoRows: { label: string; value: string }[] = [
       </div>
       <div class="mt-3 flex flex-wrap gap-1.5 text-xs text-ink-soft">
         <a
-          href={`/meridians/${meridian.id}/`}
+          href={withBase(`/meridians/${meridian.id}/`)}
           class="inline-flex items-center gap-1.5 rounded bg-paper-deep px-2 py-1 hover:text-qing"
         >
           <span class="h-2 w-2 rounded-full" style={`background-color:${meridian.color}`}></span>
@@ -84,7 +85,7 @@ const infoRows: { label: string; value: string }[] = [
         </div>
         <p class="mt-3 text-xs text-ink-faint">
           想按病症找穴位？试试
-          <a href="/search/" class="text-qing hover:underline">全局搜索</a>。
+          <a href={withBase("/search/")} class="text-qing hover:underline">全局搜索</a>。
         </p>
       </section>
 
@@ -123,13 +124,13 @@ const infoRows: { label: string; value: string }[] = [
         </p>
         <div class="mt-3 flex flex-col gap-2">
           <a
-            href={`/?focus=${point.code}#bronze3d`}
+            href={`${withBase("/")}?focus=${point.code}#bronze3d`}
             class="inline-flex items-center justify-center gap-1.5 rounded-md bg-vermilion px-4 py-2 text-sm font-bold text-paper transition-colors hover:bg-vermilion-soft"
           >
             <span>在 3D 铜人中特写 →</span>
           </a>
           <a
-            href={`/atlas/?focus=${point.code}`}
+            href={`${withBase("/atlas/")}?focus=${point.code}`}
             class="inline-flex items-center justify-center gap-1.5 rounded-md border border-line bg-card px-4 py-2 text-sm font-bold text-ink-soft transition-colors hover:border-qing-soft hover:text-qing"
           >
             <span>打开 2D 穴位图定位</span>
@@ -143,7 +144,7 @@ const infoRows: { label: string; value: string }[] = [
           {
             siblings.map((c, i) => (
               <a
-                href={`/acupoints/${c}/`}
+                href={withBase(`/acupoints/${c}/`)}
                 class:list={[
                   "rounded border px-2 py-1 text-xs transition-colors",
                   c === point.code
@@ -172,7 +173,7 @@ const infoRows: { label: string; value: string }[] = [
   <nav class="mt-8 flex items-center justify-between gap-4" aria-label="穴位翻页">
     {
       prev ? (
-        <a href={`/acupoints/${prev}/`} class="paper-card flex-1 p-4 hover:border-qing-soft">
+        <a href={withBase(`/acupoints/${prev}/`)} class="paper-card flex-1 p-4 hover:border-qing-soft">
           <p class="text-xs text-ink-faint">← 上一穴 {acupoints[prev]?.code}</p>
           <p class="mt-1 font-bold">{acupoints[prev]?.name}</p>
         </a>
@@ -182,7 +183,7 @@ const infoRows: { label: string; value: string }[] = [
     }
     {
       next ? (
-        <a href={`/acupoints/${next}/`} class="paper-card flex-1 p-4 text-right hover:border-qing-soft">
+        <a href={withBase(`/acupoints/${next}/`)} class="paper-card flex-1 p-4 text-right hover:border-qing-soft">
           <p class="text-xs text-ink-faint">下一穴 {acupoints[next]?.code} →</p>
           <p class="mt-1 font-bold">{acupoints[next]?.name}</p>
         </a>

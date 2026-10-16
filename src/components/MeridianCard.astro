@@ -17,7 +17,7 @@ const statusText = hasData
       : "待录入";
 ---
 
-<a href={`/meridians/${m.id}/`} class="paper-card group block overflow-hidden">
+<a href={`${import.meta.env.BASE_URL}/meridians/${m.id}/`} class="paper-card group block overflow-hidden">
   <div class="h-1.5 w-full" style={`background-color:${m.color}`}></div>
   <div class="p-5">
     <div class="flex items-center gap-2">
