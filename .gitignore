@@ -31,3 +31,5 @@ scripts/body3d-test.mjs
 "li4-live.html"  
 "scripts/enable-pages.mjs"  
 "scripts/poll-pages.mjs"  
+"shots-prod/"  
+"scripts/wait-deploy.mjs"  
