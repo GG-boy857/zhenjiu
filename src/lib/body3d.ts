@@ -54,12 +54,25 @@ function latheLimb(
   return m;
 }
 
-/** 组装铜人身体（含左右对称肢体） */
-export function buildBody(): THREE.Group {
+const bump = (t: number, c: number, s: number) =>
+  Math.exp(-((t - c) * (t - c)) / (2 * s * s));
+
+/** 组装铜人身体（含左右对称肢体）；variant="female" 为程序化女体回退方案 */
+export function buildBody(variant: "male" | "female" = "male"): THREE.Group {
   const group = new THREE.Group();
   group.name = "body";
   const mat = bronzeMaterial();
   const hair = hairMaterial();
+  const female = variant === "female";
+
+  // 女体躯干横向系数：胸窄、腰细、臀宽
+  const torsoFactor = (y: number) =>
+    female
+      ? 1 -
+        0.07 * bump(y, 0.8, 0.12) -
+        0.045 * bump(y, 0.3, 0.1) +
+        0.055 * bump(y, -0.18, 0.12)
+      : 1;
 
   const put = (
     geo: THREE.BufferGeometry,
@@ -89,13 +102,21 @@ export function buildBody(): THREE.Group {
   }
   // 发型盖（略大于颅顶，向后仰使前额外露）
   put(
-    new THREE.SphereGeometry(0.216, 48, 24, 0, Math.PI * 2, 0, Math.PI * 0.58),
+    new THREE.SphereGeometry(
+      0.216,
+      48,
+      24,
+      0,
+      Math.PI * 2,
+      0,
+      Math.PI * (female ? 0.74 : 0.58)
+    ),
     0,
-    1.385,
+    female ? 1.378 : 1.385,
     -0.012,
-    [1, 1, 1.04],
+    [1, female ? 1.12 : 1, 1.04],
     hair,
-    0.3
+    female ? 0.36 : 0.3
   );
 
   // ———— 颈与斜方肌 ————
@@ -103,10 +124,10 @@ export function buildBody(): THREE.Group {
   for (const s of [-1, 1]) {
     put(
       new THREE.SphereGeometry(1, 24, 16),
-      s * 0.1,
+      s * (female ? 0.088 : 0.1),
       0.9,
       0,
-      [0.15, 0.055, 0.095],
+      female ? [0.13, 0.05, 0.085] : [0.15, 0.055, 0.095],
       mat,
       0,
       s * 0.55
@@ -138,7 +159,7 @@ export function buildBody(): THREE.Group {
   ];
   const torso = new THREE.Mesh(
     new THREE.LatheGeometry(
-      torsoProfile.map(([r, y]) => new THREE.Vector2(r, y)),
+      torsoProfile.map(([r, y]) => new THREE.Vector2(r * torsoFactor(y), y)),
       56
     ),
     mat
@@ -146,13 +167,37 @@ export function buildBody(): THREE.Group {
   torso.scale.z = 0.64;
   group.add(torso);
 
+  // 乳房体块（女体）
+  if (female) {
+    for (const s of [-1, 1]) {
+      put(
+        new THREE.SphereGeometry(0.05, 24, 18),
+        s * 0.068,
+        0.66,
+        0.126,
+        [1.05, 0.95, 0.85]
+      );
+    }
+  }
+
   // 三角肌（肩部体块）
   for (const s of [-1, 1]) {
-    put(new THREE.SphereGeometry(0.082, 24, 18), s * 0.2, 0.825, 0);
+    put(
+      new THREE.SphereGeometry(female ? 0.077 : 0.082, 24, 18),
+      s * (female ? 0.188 : 0.2),
+      0.825,
+      0
+    );
   }
   // 臀部体块
   for (const s of [-1, 1]) {
-    put(new THREE.SphereGeometry(1, 24, 18), s * 0.095, -0.31, -0.075, [0.115, 0.105, 0.12]);
+    put(
+      new THREE.SphereGeometry(1, 24, 18),
+      s * (female ? 0.102 : 0.095),
+      -0.31,
+      -0.075,
+      female ? [0.125, 0.11, 0.13] : [0.115, 0.105, 0.12]
+    );
   }
 
   // ———— 上肢 ————
@@ -417,13 +462,20 @@ export function svgTo3D(svg: [number, number]): { x: number; y: number } {
 /**
  * 穴位吸附（真实解剖模型）：按标定表得到 (x,y) 后沿前后方向投射到体表；
  * 未命中则逐步向中线收拢重试，再退化为外侧横向投射。
+ * remapSeed 用于女体等变体模型：先用与网格一致的变形场变换种子点再投射。
  */
+export type SeedRemap = (x: number, y: number) => { x: number; y: number };
+
 export function snapPoint3D(
   svg: [number, number],
   side: "front" | "back",
-  body: THREE.Object3D
+  body: THREE.Object3D,
+  remapSeed?: SeedRemap
 ): SnapResult {
-  const { x: x0, y } = svgTo3D(svg);
+  const raw = svgTo3D(svg);
+  const seed = remapSeed ? remapSeed(raw.x, raw.y) : raw;
+  const x0 = seed.x;
+  const y = seed.y;
   const zSign = side === "front" ? 1 : -1;
   const raycaster = new THREE.Raycaster();
 
@@ -434,7 +486,7 @@ export function snapPoint3D(
     dx: number,
     dy: number,
     dz: number
-  ) => {
+  ): THREE.Intersection | null => {
     raycaster.set(
       new THREE.Vector3(ox, oy, oz),
       new THREE.Vector3(dx, dy, dz).normalize()

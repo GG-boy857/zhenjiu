@@ -28,8 +28,14 @@ shots/
 # body3d local test bundle
 scripts/.body3d-test.mjs
 scripts/body3d-test.mjs
-"li4-live.html"  
-"scripts/enable-pages.mjs"  
-"scripts/poll-pages.mjs"  
-"shots-prod/"  
-"scripts/wait-deploy.mjs"  
+
+# 一次性诊断/验收脚本与抓取产物（不进版本库）
+li4-live.html
+scripts/diag-*.mjs
+scripts/e2e-prod.mjs
+scripts/enable-pages.mjs
+scripts/poll-pages.mjs
+scripts/verify-gender.mjs
+scripts/wait-deploy.mjs
+shots-gender/
+shots-prod/  

@@ -75,6 +75,9 @@ function slicePartGeometry(buf: ArrayBuffer, p: AtlasPart): THREE.BufferGeometry
 }
 
 function mergeGeometries(geos: THREE.BufferGeometry[]): THREE.BufferGeometry {
+  // 肌肉部件带逐部件顶点色，合并时必须保留 color 属性，
+  // 否则 vertexColors 材质读到默认属性值 (0,0,0)，整个肌肉层渲染成黑色
+  const hasColor = geos.every((g) => !!g.getAttribute("color"));
   let vTotal = 0;
   let iTotal = 0;
   for (const g of geos) {
@@ -83,6 +86,7 @@ function mergeGeometries(geos: THREE.BufferGeometry[]): THREE.BufferGeometry {
   }
   const positions = new Float32Array(vTotal * 3);
   const normals = new Float32Array(vTotal * 3);
+  const colors = hasColor ? new Float32Array(vTotal * 3) : null;
   const indices = new Uint32Array(iTotal);
   let vo = 0;
   let io = 0;
@@ -91,6 +95,7 @@ function mergeGeometries(geos: THREE.BufferGeometry[]): THREE.BufferGeometry {
     const n = g.getAttribute("normal").array as Float32Array;
     positions.set(p, vo * 3);
     normals.set(n, vo * 3);
+    if (colors) colors.set(g.getAttribute("color").array as Float32Array, vo * 3);
     const gi = g.getIndex()!.array as Uint32Array;
     for (let i = 0; i < gi.length; i++) indices[io + i] = gi[i] + vo;
     vo += g.getAttribute("position").count;
@@ -99,6 +104,7 @@ function mergeGeometries(geos: THREE.BufferGeometry[]): THREE.BufferGeometry {
   const out = new THREE.BufferGeometry();
   out.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   out.setAttribute("normal", new THREE.BufferAttribute(normals, 3));
+  if (colors) out.setAttribute("color", new THREE.BufferAttribute(colors, 3));
   out.setIndex(new THREE.BufferAttribute(indices, 1));
   return out;
 }
