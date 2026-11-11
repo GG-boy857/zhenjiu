@@ -20,8 +20,10 @@ const videos = videosJson as unknown as Record<string, VideoEntry[]>;
 const curated = videos[code] ?? [];
 
 const q = encodeURIComponent(`${name} 针灸 治疗`);
+const qNxs = encodeURIComponent(`倪海厦 ${name}`);
 const qEn = encodeURIComponent(`${nameEn} acupuncture treatment`);
 const searches = [
+  { label: `B 站搜「倪海厦·${name}」讲解`, url: `https://search.bilibili.com/all?keyword=${qNxs}` },
   { label: "B 站搜「治疗/取穴」视频", url: `https://search.bilibili.com/all?keyword=${q}` },
   { label: "YouTube 搜教学", url: `https://www.youtube.com/results?search_query=${qEn}` },
 ];

@@ -60,6 +60,96 @@
     "tags": ["经典"]
   },
   {
+    "id": "nxs-zhenjiu-sub",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪·《针灸》全（字幕版全集）",
+    "org": "Bilibili（播放量最高版本，730 万+）",
+    "year": "",
+    "url": "https://www.bilibili.com/video/BV1bd4y1F7Zo/",
+    "desc": "倪海厦人纪开篇课，以杨继洲《针灸大成》为纲，逐经讲循行、逐穴讲定位、主治与补泻手法，并大量穿插临证取穴思路。自学针灸入门到进阶的主线课程，与本站经络/穴位栏目逐条对照。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "nxs-zhenjiu-79",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪《针灸大成》全 79 集（修复版·附讲稿·带章节）",
+    "org": "Bilibili（青囊小记）",
+    "year": "2025",
+    "url": "https://www.bilibili.com/video/BV1WTtFzdEGe/",
+    "desc": "4K/60 帧修复音频字幕版，79 集全并带章节列表，方便按经络跳到对应讲次；讲稿与视频配套，适合做笔记复习。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "nxs-neijing",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪·《黄帝内经》合集（字幕版 1-78 完结）",
+    "org": "Bilibili",
+    "year": "",
+    "url": "https://www.bilibili.com/video/BV1NM4y1M7yK/",
+    "desc": "倪师讲素问与灵枢条文，重经络理论、病机与治则阐发；配合本站「经络」页的循行描述与流注时辰学习效果最好。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "nxs-bencao",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪·《神农本草经》全集",
+    "org": "Bilibili",
+    "year": "",
+    "url": "https://www.bilibili.com/video/BV1M7421T7Qb/",
+    "desc": "按倪师“药性以性味为主”的思路逐味讲解本经药物，为理解针灸处方配穴背后的方药思维打底。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "nxs-shanghan",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪·《伤寒论》字幕版全集（DVD 原版）",
+    "org": "Bilibili",
+    "year": "",
+    "url": "https://www.bilibili.com/video/BV13P4y1r7mb/",
+    "desc": "六经辨证体系的核心课程；倪师讲伤寒重“方证对应与经络气化”，针灸取穴常与六经传变互参。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "nxs-jinkui",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪·《金匮要略》（原版 DVD 附讲稿，全 78 集）",
+    "org": "Bilibili",
+    "year": "",
+    "url": "https://www.bilibili.com/video/BV1UHvAztE8m/",
+    "desc": "杂病论治部分，与《伤寒论》互为表里；讲稿与视频配套，适合按病种检索复习。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "nxs-renji-all",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "人纪五部曲大合集（针灸→神农本草→内经→伤寒→金匮）",
+    "org": "Bilibili（字幕完整版）",
+    "year": "",
+    "url": "https://www.bilibili.com/video/BV1dtfHYgEeU/",
+    "desc": "按倪师建议的学习顺序整合的五科合集，想完整跟完人纪体系从这一条进入即可；人纪以《针灸》为第一课，“针灸为学中医之始”。",
+    "tags": ["倪海厦", "视频"]
+  },
+  {
+    "id": "hantang-articles",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "汉唐中医官网 · 文章区（倪海厦文章与医案）",
+    "org": "美国汉唐中医学院（hantang.com）",
+    "year": "",
+    "url": "https://www.hantang.com/chinese/ch_Articles/Ch_index.html",
+    "desc": "倪海厦创立的汉唐中医官网文章区，收录其理论文章、医案与读者问答；网站年代较久，部分链接可能失效，以原站内容为准。",
+    "tags": ["倪海厦", "文章"]
+  },
+  {
+    "id": "nxs-ziliao-huizong",
+    "category": "倪海厦人纪系列（视频讲座）",
+    "title": "倪海厦学习资料汇总（社区整理）",
+    "org": "Bilibili 专栏",
+    "year": "",
+    "url": "https://www.bilibili.com/opus/920976726421405701",
+    "desc": "社区整理的天纪/人纪各科视频、讲稿与 DVD 对应表；想定位“某一讲讲的是什么”时先查这里。",
+    "tags": ["倪海厦", "工具"]
+  },
+  {
     "id": "vickers-2018",
     "category": "循证研究与综述",
     "title": "Acupuncture for Chronic Pain: Update of an Individual Patient Data Meta-Analysis",

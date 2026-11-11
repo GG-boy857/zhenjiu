@@ -38,4 +38,5 @@ scripts/poll-pages.mjs
 scripts/verify-gender.mjs
 scripts/wait-deploy.mjs
 shots-gender/
+shots-nxs/
 shots-prod/  

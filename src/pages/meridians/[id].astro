@@ -15,6 +15,12 @@ const jiaohuiPoints = (meridian.jiaohui ?? [])
   .filter(Boolean);
 const totalIndications = points.reduce((n, p) => n + p.indications.length, 0);
 const withBase = (p: string) => import.meta.env.BASE_URL.replace(/\/$/, "") + p;
+// 倪海厦人纪·针灸大成：本经讲解入口（详情页底部）
+const nxsSearch = `https://search.bilibili.com/all?keyword=${encodeURIComponent(`倪海厦 ${meridian.name}`)}`;
+const nxsLinks = [
+  { label: `B 站搜「倪海厦·${meridian.name}」讲解`, url: nxsSearch, desc: "人纪针灸篇中与本经对应的讲次片段" },
+  { label: "人纪·《针灸》全（字幕版全集）", url: "https://www.bilibili.com/video/BV1bd4y1F7Zo/", desc: "主线课程，从本经开始系统跟学" },
+];
 ---
 
 <BaseLayout title={`${meridian.name} · 经络`}>
@@ -112,4 +118,32 @@ const withBase = (p: string) => import.meta.env.BASE_URL.replace(/\/$/, "") + p;
       </section>
     )
   }
+
+  <!-- 师承视频讲解入口（倪海厦人纪·针灸大成） -->
+  <section class="paper-card mt-8 p-5">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <h2 class="section-title text-lg">师承视频讲解</h2>
+      <a href={`${import.meta.env.BASE_URL}/references/`} class="text-sm text-qing hover:underline">
+        文献知识库 →
+      </a>
+    </div>
+    <p class="mt-3 text-sm leading-7 text-ink-soft">
+      倪海厦《人纪·针灸》以杨继洲《针灸大成》为纲，逐经讲循行与取穴，逐穴讲主治与补泻；配合本页穴位卡片对照学习。
+    </p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {
+        nxsLinks.map((l) => (
+          <a
+            href={l.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-md border border-line bg-paper px-3 py-1.5 text-sm text-ink-soft transition-colors hover:border-qing-soft hover:text-qing"
+          >
+            ▶ {l.label}
+            <span class="ml-1.5 text-xs text-ink-faint">{l.desc}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 </BaseLayout>
